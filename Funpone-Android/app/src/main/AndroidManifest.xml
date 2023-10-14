@@ -17,6 +17,9 @@
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.Funpone">
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

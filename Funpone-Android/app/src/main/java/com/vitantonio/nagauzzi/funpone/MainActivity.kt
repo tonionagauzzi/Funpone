@@ -17,11 +17,16 @@ import com.vitantonio.nagauzzi.funpone.ui.theme.FunponeTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val url = "https://www.yahoo.co.jp/"
-        val intent = Intent(Intent.ACTION_VIEW).apply {
-            data = Uri.parse(url)
+
+        if (!intent.getBooleanExtra("shortcut", false)) {
+            val url = "https://www.yahoo.co.jp/"
+            val intent = Intent(Intent.ACTION_VIEW).apply {
+                data = Uri.parse(url)
+            }
+            startActivity(intent)
+            finish()
         }
-        startActivity(intent)
+
         setContent {
             FunponeTheme {
                 // A surface container using the 'background' color from the theme

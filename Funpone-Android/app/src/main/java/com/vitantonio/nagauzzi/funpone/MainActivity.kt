@@ -2,6 +2,7 @@
 
 package com.vitantonio.nagauzzi.funpone
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -25,20 +26,34 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.preferencesDataStore
 import com.vitantonio.nagauzzi.funpone.ui.theme.FunponeTheme
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
+    private companion object {
+        const val INITIAL_URL = "https://www.yahoo.co.jp/"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -49,13 +64,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    val urls = remember {
-                        mutableStateListOf(
-                            "https://www.yahoo.co.jp/",
-                            "https://www.google.com/"
-                        )
-                    }
-                    var selectedUrl by remember { mutableStateOf(urls[1]) }
+                    val coroutineScope = rememberCoroutineScope()
+                    val settingsRepository = SettingsRepository(LocalContext.current)
+                    val urls by settingsRepository.urls.collectAsState(initial = listOf(INITIAL_URL))
+                    val selectedUrl by settingsRepository.selectedUrl.collectAsState(initial = INITIAL_URL)
                     var clickedUrl by remember { mutableStateOf("") }
                     var menuExpanded by remember { mutableStateOf(false) }
                     if (!intent.getBooleanExtra("shortcut", false)) {
@@ -70,8 +82,18 @@ class MainActivity : ComponentActivity() {
                                 UrlItem(
                                     selected = url == selectedUrl,
                                     url = url,
-                                    onUrlChange = {
-                                        urls[index] = it
+                                    onUrlChange = { newUrl ->
+                                        coroutineScope.launch {
+                                            settingsRepository.save(
+                                                urls = urls.mapIndexed { searchIndex, url ->
+                                                    if (index == searchIndex) {
+                                                        newUrl
+                                                    } else {
+                                                        url
+                                                    }
+                                                }
+                                            )
+                                        }
                                     },
                                     onClickDropdown = {
                                         clickedUrl = url
@@ -79,13 +101,23 @@ class MainActivity : ComponentActivity() {
                                     }
                                 )
                             }
-                            Button(
+                            Row(
                                 modifier = Modifier.align(Alignment.End),
-                                onClick = {
-                                    urls.add("")
-                                }
                             ) {
-                                Icon(imageVector = Icons.Default.Add, contentDescription = "追加")
+                                Button(
+                                    onClick = {
+                                        coroutineScope.launch {
+                                            settingsRepository.save(
+                                                urls = urls.plus(""),
+                                            )
+                                        }
+                                    }
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.Add,
+                                        contentDescription = "追加"
+                                    )
+                                }
                             }
                         }
                         UrlItemDropdownMenu(
@@ -93,23 +125,39 @@ class MainActivity : ComponentActivity() {
                             onClickMoveAbove = {
                                 urls.indexOf(clickedUrl).let { selectingIndex ->
                                     if (selectingIndex != 0) {
+                                        var mutableUrls = urls.toMutableList()
                                         val tmp = urls[selectingIndex]
-                                        urls[selectingIndex] = urls[selectingIndex - 1]
-                                        urls[selectingIndex - 1] = tmp
+                                        mutableUrls[selectingIndex] = urls[selectingIndex - 1]
+                                        mutableUrls[selectingIndex - 1] = tmp
+                                        coroutineScope.launch {
+                                            settingsRepository.save(urls = mutableUrls.toList())
+                                        }
                                     }
                                 }
                             },
                             onClickMoveBelow = {
                                 urls.indexOf(clickedUrl).let { selectingIndex ->
                                     if (selectingIndex != urls.size - 1) {
+                                        var mutableUrls = urls.toMutableList()
                                         val tmp = urls[selectingIndex]
-                                        urls[selectingIndex] = urls[selectingIndex + 1]
-                                        urls[selectingIndex + 1] = tmp
+                                        mutableUrls[selectingIndex] = urls[selectingIndex + 1]
+                                        mutableUrls[selectingIndex + 1] = tmp
+                                        coroutineScope.launch {
+                                            settingsRepository.save(urls = mutableUrls.toList())
+                                        }
                                     }
                                 }
                             },
-                            onClickSelect = { selectedUrl = clickedUrl },
-                            onClickDelete = { urls.remove(clickedUrl) },
+                            onClickSelect = {
+                                coroutineScope.launch {
+                                    settingsRepository.save(selectedUrl = clickedUrl)
+                                }
+                            },
+                            onClickDelete = {
+                                coroutineScope.launch {
+                                    settingsRepository.save(urls = urls.minus(clickedUrl))
+                                }
+                            },
                             onDismiss = { menuExpanded = false }
                         )
                     }
@@ -238,3 +286,48 @@ fun UrlItemDropdownMenuPreview() {
         )
     }
 }
+
+val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+
+class SettingsRepository(
+    private val context: Context
+) {
+    companion object {
+        const val INITIAL_URL = "https://www.yahoo.co.jp/"
+    }
+
+    private object PreferencesKeys {
+        val URLS = stringPreferencesKey("urls")
+        val SELECTED_URL = stringPreferencesKey("selected_url")
+    }
+
+    val urls: Flow<List<String>> = context.dataStore.data
+        .map { preferences ->
+            preferences[PreferencesKeys.URLS]?.split("¥n")?.toList() ?: listOf(INITIAL_URL)
+        }
+
+    val selectedUrl: Flow<String> = context.dataStore.data
+        .map { preferences ->
+            preferences[PreferencesKeys.SELECTED_URL] ?: INITIAL_URL
+        }
+
+    suspend fun save(urls: List<String>) {
+        context.dataStore.edit { settings ->
+            settings[PreferencesKeys.URLS] = urls.joinToString(separator = "¥n")
+        }
+    }
+
+    suspend fun save(selectedUrl: String) {
+        context.dataStore.edit { settings ->
+            settings[PreferencesKeys.SELECTED_URL] = selectedUrl
+        }
+    }
+
+    suspend fun save(urls: List<String>, selectedUrl: String) {
+        context.dataStore.edit { settings ->
+            settings[PreferencesKeys.URLS] = urls.joinToString(separator = "¥n")
+            settings[PreferencesKeys.SELECTED_URL] = selectedUrl
+        }
+    }
+}
+

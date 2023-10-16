@@ -186,8 +186,8 @@ fun UrlItem(
     ) {
         Button(
             colors = ButtonDefaults.buttonColors(
-                containerColor = if (selected) Color.Green else Color.Transparent,
-                contentColor = Color.Black
+                containerColor = if (selected) MaterialTheme.colorScheme.secondary else MaterialTheme.colorScheme.background,
+                contentColor = if (selected) MaterialTheme.colorScheme.onSecondary else MaterialTheme.colorScheme.onBackground,
             ),
             elevation = ButtonDefaults.buttonElevation(0.dp),
             onClick = onClickDropdown,

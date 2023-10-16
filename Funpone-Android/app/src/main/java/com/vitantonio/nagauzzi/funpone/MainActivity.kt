@@ -42,8 +42,7 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun canOpenUrlImmediately(url: String): Boolean {
-        return !intent.getBooleanExtra("shortcut", false)
-                && (url.startsWith("http://") || url.startsWith("https://"))
+        return !intent.getBooleanExtra("shortcut", false) && isValid(url = url)
     }
 
     private fun openUrl(url: String) {

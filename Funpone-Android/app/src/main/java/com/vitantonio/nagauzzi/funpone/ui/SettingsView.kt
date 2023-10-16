@@ -1,5 +1,6 @@
 package com.vitantonio.nagauzzi.funpone.ui
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.icons.Icons
@@ -15,11 +16,13 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.vitantonio.nagauzzi.funpone.R
 import com.vitantonio.nagauzzi.funpone.data.SettingsRepositoryStub
 import com.vitantonio.nagauzzi.funpone.data.SettingsRepository
+import com.vitantonio.nagauzzi.funpone.isValid
 import com.vitantonio.nagauzzi.funpone.ui.theme.FunponeTheme
 import kotlinx.coroutines.launch
 
@@ -28,6 +31,7 @@ fun SettingsView(
     repository: SettingsRepository,
     selectedUrl: String
 ) {
+    val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
     val urls by repository.urls.collectAsState(initial = emptyList())
     var clickedUrl by remember { mutableStateOf("") }
@@ -106,8 +110,12 @@ fun SettingsView(
             }
         },
         onClickSelect = {
-            coroutineScope.launch {
-                repository.save(selectedUrl = clickedUrl)
+            if (isValid(url = clickedUrl)) {
+                coroutineScope.launch {
+                    repository.save(selectedUrl = clickedUrl)
+                }
+            } else {
+                Toast.makeText(context, R.string.invalid_url, Toast.LENGTH_SHORT).show()
             }
         },
         onClickDelete = {

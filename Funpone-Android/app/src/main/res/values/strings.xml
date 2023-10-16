@@ -2,6 +2,7 @@
     <string name="app_name">Funpone</string>
     <string name="add">Add</string>
     <string name="delete">Delete</string>
+    <string name="invalid_url">Invalid URL!</string>
     <string name="move">Move</string>
     <string name="move_above">Move above</string>
     <string name="move_below">Move below</string>

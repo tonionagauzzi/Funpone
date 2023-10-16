@@ -40,21 +40,17 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    val coroutineScope = rememberCoroutineScope()
                     val settingsRepository = SettingsRepository(LocalContext.current)
-                    val urls by settingsRepository.urls.collectAsState(initial = emptyList())
                     val selectedUrl by settingsRepository.selectedUrl.collectAsState(initial = "")
-                    var clickedUrl by remember { mutableStateOf("") }
-                    var menuExpanded by remember { mutableStateOf(false) }
-                    if (!intent.getBooleanExtra("shortcut", false)
-                        && urls.isNotEmpty()
-                        && selectedUrl.isNotEmpty()) {
-                        val intent = Intent(Intent.ACTION_VIEW).apply {
-                            data = Uri.parse(selectedUrl)
-                        }
-                        startActivity(intent)
+
+                    if (canOpenUrlImmediately(url = selectedUrl)) {
+                        openUrl(url = selectedUrl)
                         finish()
                     } else {
+                        val coroutineScope = rememberCoroutineScope()
+                        val urls by settingsRepository.urls.collectAsState(initial = emptyList())
+                        var clickedUrl by remember { mutableStateOf("") }
+                        var menuExpanded by remember { mutableStateOf(false) }
                         Column {
                             urls.forEachIndexed { index, url ->
                                 val selected = url == selectedUrl
@@ -144,5 +140,17 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    private fun canOpenUrlImmediately(url: String): Boolean {
+        return !intent.getBooleanExtra("shortcut", false)
+                && url.startsWith("http://") || url.startsWith("https://")
+    }
+
+    private fun openUrl(url: String) {
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            data = Uri.parse(url)
+        }
+        startActivity(intent)
     }
 }

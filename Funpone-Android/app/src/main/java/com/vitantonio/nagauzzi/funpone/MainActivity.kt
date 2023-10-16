@@ -50,10 +50,6 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
-    private companion object {
-        const val INITIAL_URL = "https://www.yahoo.co.jp/"
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -66,11 +62,13 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val coroutineScope = rememberCoroutineScope()
                     val settingsRepository = SettingsRepository(LocalContext.current)
-                    val urls by settingsRepository.urls.collectAsState(initial = listOf(INITIAL_URL))
-                    val selectedUrl by settingsRepository.selectedUrl.collectAsState(initial = INITIAL_URL)
+                    val urls by settingsRepository.urls.collectAsState(initial = emptyList())
+                    val selectedUrl by settingsRepository.selectedUrl.collectAsState(initial = "")
                     var clickedUrl by remember { mutableStateOf("") }
                     var menuExpanded by remember { mutableStateOf(false) }
-                    if (!intent.getBooleanExtra("shortcut", false)) {
+                    if (!intent.getBooleanExtra("shortcut", false)
+                        && urls.isNotEmpty()
+                        && selectedUrl.isNotEmpty()) {
                         val intent = Intent(Intent.ACTION_VIEW).apply {
                             data = Uri.parse(selectedUrl)
                         }
@@ -79,8 +77,9 @@ class MainActivity : ComponentActivity() {
                     } else {
                         Column {
                             urls.forEachIndexed { index, url ->
+                                val selected = url == selectedUrl
                                 UrlItem(
-                                    selected = url == selectedUrl,
+                                    selected = selected,
                                     url = url,
                                     onUrlChange = { newUrl ->
                                         coroutineScope.launch {
@@ -91,7 +90,8 @@ class MainActivity : ComponentActivity() {
                                                     } else {
                                                         url
                                                     }
-                                                }
+                                                },
+                                                selectedUrl = if (selected) newUrl else selectedUrl
                                             )
                                         }
                                     },
@@ -292,7 +292,7 @@ val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "se
 class SettingsRepository(
     private val context: Context
 ) {
-    companion object {
+    private companion object {
         const val INITIAL_URL = "https://www.yahoo.co.jp/"
     }
 

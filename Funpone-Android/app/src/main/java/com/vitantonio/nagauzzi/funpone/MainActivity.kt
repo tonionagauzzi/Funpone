@@ -43,7 +43,7 @@ class MainActivity : ComponentActivity() {
 
     private fun canOpenUrlImmediately(url: String): Boolean {
         return !intent.getBooleanExtra("shortcut", false)
-                && url.startsWith("http://") || url.startsWith("https://")
+                && (url.startsWith("http://") || url.startsWith("https://"))
     }
 
     private fun openUrl(url: String) {

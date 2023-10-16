@@ -44,6 +44,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import com.vitantonio.nagauzzi.funpone.data.SettingsRepository
 import com.vitantonio.nagauzzi.funpone.ui.theme.FunponeTheme
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -288,46 +289,3 @@ fun UrlItemDropdownMenuPreview() {
 }
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
-
-class SettingsRepository(
-    private val context: Context
-) {
-    private companion object {
-        const val INITIAL_URL = "https://www.yahoo.co.jp/"
-    }
-
-    private object PreferencesKeys {
-        val URLS = stringPreferencesKey("urls")
-        val SELECTED_URL = stringPreferencesKey("selected_url")
-    }
-
-    val urls: Flow<List<String>> = context.dataStore.data
-        .map { preferences ->
-            preferences[PreferencesKeys.URLS]?.split("¥n")?.toList() ?: listOf(INITIAL_URL)
-        }
-
-    val selectedUrl: Flow<String> = context.dataStore.data
-        .map { preferences ->
-            preferences[PreferencesKeys.SELECTED_URL] ?: INITIAL_URL
-        }
-
-    suspend fun save(urls: List<String>) {
-        context.dataStore.edit { settings ->
-            settings[PreferencesKeys.URLS] = urls.joinToString(separator = "¥n")
-        }
-    }
-
-    suspend fun save(selectedUrl: String) {
-        context.dataStore.edit { settings ->
-            settings[PreferencesKeys.SELECTED_URL] = selectedUrl
-        }
-    }
-
-    suspend fun save(urls: List<String>, selectedUrl: String) {
-        context.dataStore.edit { settings ->
-            settings[PreferencesKeys.URLS] = urls.joinToString(separator = "¥n")
-            settings[PreferencesKeys.SELECTED_URL] = selectedUrl
-        }
-    }
-}
-

@@ -4,7 +4,9 @@ import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.vitantonio.nagauzzi.funpone.R
 import com.vitantonio.nagauzzi.funpone.ui.theme.FunponeTheme
 
 @Composable
@@ -26,7 +28,7 @@ fun UrlItemDropdownMenu(
                 onDismiss()
             },
             text = {
-                Text(text = "1つ上へ移動")
+                Text(text = stringResource(id = R.string.move_above))
             }
         )
         DropdownMenuItem(
@@ -35,7 +37,7 @@ fun UrlItemDropdownMenu(
                 onDismiss()
             },
             text = {
-                Text(text = "選択")
+                Text(text = stringResource(id = R.string.select))
             }
         )
         DropdownMenuItem(
@@ -44,7 +46,7 @@ fun UrlItemDropdownMenu(
                 onDismiss()
             },
             text = {
-                Text(text = "1つ下へ移動")
+                Text(text = stringResource(id = R.string.move_below))
             }
         )
         DropdownMenuItem(
@@ -53,7 +55,7 @@ fun UrlItemDropdownMenu(
                 onDismiss()
             },
             text = {
-                Text(text = "削除")
+                Text(text = stringResource(id = R.string.delete))
             }
         )
     }

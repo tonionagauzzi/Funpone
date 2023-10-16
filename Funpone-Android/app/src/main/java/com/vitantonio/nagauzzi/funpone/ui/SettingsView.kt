@@ -15,7 +15,9 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.vitantonio.nagauzzi.funpone.R
 import com.vitantonio.nagauzzi.funpone.data.SettingsRepositoryStub
 import com.vitantonio.nagauzzi.funpone.data.SettingsRepository
 import com.vitantonio.nagauzzi.funpone.ui.theme.FunponeTheme
@@ -70,8 +72,8 @@ fun SettingsView(
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
-                    contentDescription = "追加"
-                )
+                    contentDescription = stringResource(id = R.string.add)
+                    )
             }
         }
     }

@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Funpone</string>
+    <string name="add">追加</string>
+    <string name="delete">削除</string>
+    <string name="move">移動</string>
+    <string name="move_above">1つ上へ移動</string>
+    <string name="move_below">1つ下へ移動</string>
+    <string name="select">選択</string>
+    <string name="setting">設定</string>
+</resources>

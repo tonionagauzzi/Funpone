@@ -3,7 +3,7 @@
     <shortcut
         android:icon="@drawable/ic_launcher_foreground"
         android:shortcutId="shortcut_test3"
-        android:shortcutShortLabel="@string/shortcut_setting">
+        android:shortcutShortLabel="@string/setting">
         <intent
             android:action="android.intent.action.VIEW"
             android:targetPackage="com.vitantonio.nagauzzi.funpone"

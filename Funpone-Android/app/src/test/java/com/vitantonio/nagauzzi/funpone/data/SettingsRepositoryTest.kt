@@ -1,17 +1,16 @@
 package com.vitantonio.nagauzzi.funpone.data
 
-import android.content.Context
-import androidx.test.core.app.ApplicationProvider
-import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
 import app.cash.turbine.test
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
 
-@RunWith(AndroidJUnit4::class)
+@RunWith(RobolectricTestRunner::class)
 class SettingsRepositoryTest {
-    private val context = ApplicationProvider.getApplicationContext<Context>()
+    private val context = InstrumentationRegistry.getInstrumentation().context
     private val settingsRepository: SettingsRepository by context.repository()
 
     @Test

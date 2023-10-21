@@ -20,10 +20,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.vitantonio.nagauzzi.funpone.R
-import com.vitantonio.nagauzzi.funpone.data.SettingsRepositoryStub
 import com.vitantonio.nagauzzi.funpone.data.SettingsRepository
 import com.vitantonio.nagauzzi.funpone.isValid
 import com.vitantonio.nagauzzi.funpone.ui.theme.FunponeTheme
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.launch
 
 @Composable
@@ -77,7 +78,7 @@ fun SettingsView(
                 Icon(
                     imageVector = Icons.Default.Add,
                     contentDescription = stringResource(id = R.string.add)
-                    )
+                )
             }
         }
     }
@@ -86,7 +87,7 @@ fun SettingsView(
         onClickMoveAbove = {
             urls.indexOf(clickedUrl).let { selectingIndex ->
                 if (selectingIndex != 0) {
-                    var mutableUrls = urls.toMutableList()
+                    val mutableUrls = urls.toMutableList()
                     val tmp = urls[selectingIndex]
                     mutableUrls[selectingIndex] = urls[selectingIndex - 1]
                     mutableUrls[selectingIndex - 1] = tmp
@@ -99,7 +100,7 @@ fun SettingsView(
         onClickMoveBelow = {
             urls.indexOf(clickedUrl).let { selectingIndex ->
                 if (selectingIndex != urls.size - 1) {
-                    var mutableUrls = urls.toMutableList()
+                    val mutableUrls = urls.toMutableList()
                     val tmp = urls[selectingIndex]
                     mutableUrls[selectingIndex] = urls[selectingIndex + 1]
                     mutableUrls[selectingIndex + 1] = tmp
@@ -132,8 +133,19 @@ fun SettingsView(
 fun SettingsViewPreview() {
     FunponeTheme {
         SettingsView(
-            repository = SettingsRepositoryStub(),
+            repository = SettingsRepositoryStubForPreview(),
             selectedUrl = "https://example.com/"
         )
     }
+}
+
+private class SettingsRepositoryStubForPreview(
+    override val urls: Flow<List<String>> = listOf(listOf("https://example.com/")).asFlow(),
+    override val selectedUrl: Flow<String> = listOf("https://example.com/").asFlow()
+) : SettingsRepository {
+    override suspend fun save(urls: List<String>) = Unit
+
+    override suspend fun save(selectedUrl: String) = Unit
+
+    override suspend fun save(urls: List<String>, selectedUrl: String) = Unit
 }

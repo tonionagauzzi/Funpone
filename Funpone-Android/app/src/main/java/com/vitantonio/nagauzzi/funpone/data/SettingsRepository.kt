@@ -6,10 +6,9 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.vitantonio.nagauzzi.funpone.dataStore
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.map
 
-interface SettingsRepository: Repository {
+interface SettingsRepository : Repository {
     val urls: Flow<List<String>>
     val selectedUrl: Flow<String>
 
@@ -20,7 +19,7 @@ interface SettingsRepository: Repository {
 
 internal class SettingsRepositoryImpl(
     private val context: Context
-): SettingsRepository {
+) : SettingsRepository {
     override val urls: Flow<List<String>> = context.dataStore.data
         .map { preferences ->
             preferences[PreferencesKeys.URLS]?.split("¥n")?.toList()
@@ -67,15 +66,4 @@ internal class SettingsRepositoryImpl(
     private object PreferencesValues {
         const val INITIAL_URL = "https://www.yahoo.co.jp/"
     }
-}
-
-class SettingsRepositoryStub(
-    override val urls: Flow<List<String>> = listOf(listOf("https://example.com/")).asFlow(),
-    override val selectedUrl: Flow<String> = listOf("https://example.com/").asFlow()
-) : SettingsRepository {
-    override suspend fun save(urls: List<String>) = Unit
-
-    override suspend fun save(selectedUrl: String) = Unit
-
-    override suspend fun save(urls: List<String>, selectedUrl: String) = Unit
 }

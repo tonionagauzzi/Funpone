@@ -69,6 +69,6 @@ dependencies {
     testImplementation("app.cash.turbine:turbine:1.0.0")
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.robolectric:robolectric:4.10.3")
-    testImplementation("androidx.compose.ui:ui-test-junit4:1.5.3")
+    testImplementation("androidx.compose.ui:ui-test-junit4:1.5.4")
     debugImplementation("androidx.compose.ui:ui-tooling")
 }

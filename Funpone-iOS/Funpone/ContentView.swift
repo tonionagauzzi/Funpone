@@ -11,6 +11,7 @@ import SwiftData
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
+    private(set) var openYahoo: () -> ()
 
     var body: some View {
         NavigationSplitView {
@@ -42,6 +43,9 @@ struct ContentView: View {
         } detail: {
             Text("Select an item")
         }
+        .onAppear {
+            openYahoo()
+        }
     }
 
     private func addItem() {
@@ -61,6 +65,6 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    ContentView(openYahoo: {})
         .modelContainer(for: Item.self, inMemory: true)
 }

@@ -25,8 +25,14 @@ struct FunponeApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(openYahoo: openYahoo)
         }
         .modelContainer(sharedModelContainer)
+    }
+
+    private func openYahoo() {
+        if let url = URL(string: "https://www.yahoo.co.jp") {
+            UIApplication.shared.open(url)
+        }
     }
 }

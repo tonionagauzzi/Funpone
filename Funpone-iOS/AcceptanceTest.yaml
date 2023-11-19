@@ -1,0 +1,6 @@
+# Maestro
+# Run "maestro test AcceptanceTest.yaml"
+appId: com.vitantonio.nagauzzi.Funpone
+---
+- launchApp
+- assertVisible: "yahoo.co.jp"

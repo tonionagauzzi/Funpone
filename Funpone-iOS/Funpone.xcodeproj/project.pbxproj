@@ -15,6 +15,14 @@
 		C26F14472AEF338700A543DA /* FunponeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26F14462AEF338700A543DA /* FunponeTests.swift */; };
 		C26F14512AEF338700A543DA /* FunponeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26F14502AEF338700A543DA /* FunponeUITests.swift */; };
 		C26F14532AEF338700A543DA /* FunponeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26F14522AEF338700A543DA /* FunponeUITestsLaunchTests.swift */; };
+		C2B6C96B2B09A84700944243 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2B6C96A2B09A84700944243 /* WidgetKit.framework */; };
+		C2B6C96D2B09A84700944243 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2B6C96C2B09A84700944243 /* SwiftUI.framework */; };
+		C2B6C9702B09A84700944243 /* ShortcutWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B6C96F2B09A84700944243 /* ShortcutWidgetBundle.swift */; };
+		C2B6C9722B09A84700944243 /* ShortcutWidgetLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B6C9712B09A84700944243 /* ShortcutWidgetLiveActivity.swift */; };
+		C2B6C9742B09A84700944243 /* ShortcutWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B6C9732B09A84700944243 /* ShortcutWidget.swift */; };
+		C2B6C9762B09A84700944243 /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B6C9752B09A84700944243 /* AppIntent.swift */; };
+		C2B6C9782B09A84A00944243 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C2B6C9772B09A84A00944243 /* Assets.xcassets */; };
+		C2B6C97C2B09A84A00944243 /* ShortcutWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = C2B6C9682B09A84700944243 /* ShortcutWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,7 +40,28 @@
 			remoteGlobalIDString = C26F142E2AEF338500A543DA;
 			remoteInfo = Funpone;
 		};
+		C2B6C97A2B09A84A00944243 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C26F14272AEF338500A543DA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C2B6C9672B09A84700944243;
+			remoteInfo = ShortcutWidgetExtension;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C2B6C97D2B09A84A00944243 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				C2B6C97C2B09A84A00944243 /* ShortcutWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		C26F142F2AEF338500A543DA /* Funpone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Funpone.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -47,6 +76,15 @@
 		C26F144C2AEF338700A543DA /* FunponeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FunponeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C26F14502AEF338700A543DA /* FunponeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunponeUITests.swift; sourceTree = "<group>"; };
 		C26F14522AEF338700A543DA /* FunponeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunponeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C2B6C9682B09A84700944243 /* ShortcutWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ShortcutWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		C2B6C96A2B09A84700944243 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		C2B6C96C2B09A84700944243 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		C2B6C96F2B09A84700944243 /* ShortcutWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutWidgetBundle.swift; sourceTree = "<group>"; };
+		C2B6C9712B09A84700944243 /* ShortcutWidgetLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutWidgetLiveActivity.swift; sourceTree = "<group>"; };
+		C2B6C9732B09A84700944243 /* ShortcutWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutWidget.swift; sourceTree = "<group>"; };
+		C2B6C9752B09A84700944243 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
+		C2B6C9772B09A84A00944243 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C2B6C9792B09A84A00944243 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +109,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C2B6C9652B09A84700944243 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C2B6C96D2B09A84700944243 /* SwiftUI.framework in Frameworks */,
+				C2B6C96B2B09A84700944243 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -80,6 +127,8 @@
 				C26F14312AEF338500A543DA /* Funpone */,
 				C26F14452AEF338700A543DA /* FunponeTests */,
 				C26F144F2AEF338700A543DA /* FunponeUITests */,
+				C2B6C96E2B09A84700944243 /* ShortcutWidget */,
+				C2B6C9692B09A84700944243 /* Frameworks */,
 				C26F14302AEF338500A543DA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -90,6 +139,7 @@
 				C26F142F2AEF338500A543DA /* Funpone.app */,
 				C26F14422AEF338700A543DA /* FunponeTests.xctest */,
 				C26F144C2AEF338700A543DA /* FunponeUITests.xctest */,
+				C2B6C9682B09A84700944243 /* ShortcutWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -132,6 +182,28 @@
 			path = FunponeUITests;
 			sourceTree = "<group>";
 		};
+		C2B6C9692B09A84700944243 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C2B6C96A2B09A84700944243 /* WidgetKit.framework */,
+				C2B6C96C2B09A84700944243 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C2B6C96E2B09A84700944243 /* ShortcutWidget */ = {
+			isa = PBXGroup;
+			children = (
+				C2B6C96F2B09A84700944243 /* ShortcutWidgetBundle.swift */,
+				C2B6C9712B09A84700944243 /* ShortcutWidgetLiveActivity.swift */,
+				C2B6C9732B09A84700944243 /* ShortcutWidget.swift */,
+				C2B6C9752B09A84700944243 /* AppIntent.swift */,
+				C2B6C9772B09A84A00944243 /* Assets.xcassets */,
+				C2B6C9792B09A84A00944243 /* Info.plist */,
+			);
+			path = ShortcutWidget;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -142,10 +214,12 @@
 				C26F142B2AEF338500A543DA /* Sources */,
 				C26F142C2AEF338500A543DA /* Frameworks */,
 				C26F142D2AEF338500A543DA /* Resources */,
+				C2B6C97D2B09A84A00944243 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				C2B6C97B2B09A84A00944243 /* PBXTargetDependency */,
 			);
 			name = Funpone;
 			productName = Funpone;
@@ -188,6 +262,23 @@
 			productReference = C26F144C2AEF338700A543DA /* FunponeUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		C2B6C9672B09A84700944243 /* ShortcutWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C2B6C9802B09A84A00944243 /* Build configuration list for PBXNativeTarget "ShortcutWidgetExtension" */;
+			buildPhases = (
+				C2B6C9642B09A84700944243 /* Sources */,
+				C2B6C9652B09A84700944243 /* Frameworks */,
+				C2B6C9662B09A84700944243 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ShortcutWidgetExtension;
+			productName = ShortcutWidgetExtension;
+			productReference = C2B6C9682B09A84700944243 /* ShortcutWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -209,6 +300,9 @@
 						CreatedOnToolsVersion = 15.0.1;
 						TestTargetID = C26F142E2AEF338500A543DA;
 					};
+					C2B6C9672B09A84700944243 = {
+						CreatedOnToolsVersion = 15.0.1;
+					};
 				};
 			};
 			buildConfigurationList = C26F142A2AEF338500A543DA /* Build configuration list for PBXProject "Funpone" */;
@@ -227,6 +321,7 @@
 				C26F142E2AEF338500A543DA /* Funpone */,
 				C26F14412AEF338700A543DA /* FunponeTests */,
 				C26F144B2AEF338700A543DA /* FunponeUITests */,
+				C2B6C9672B09A84700944243 /* ShortcutWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -252,6 +347,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C2B6C9662B09A84700944243 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C2B6C9782B09A84A00944243 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,6 +388,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C2B6C9642B09A84700944243 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C2B6C9742B09A84700944243 /* ShortcutWidget.swift in Sources */,
+				C2B6C9762B09A84700944243 /* AppIntent.swift in Sources */,
+				C2B6C9722B09A84700944243 /* ShortcutWidgetLiveActivity.swift in Sources */,
+				C2B6C9702B09A84700944243 /* ShortcutWidgetBundle.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -297,6 +411,11 @@
 			isa = PBXTargetDependency;
 			target = C26F142E2AEF338500A543DA /* Funpone */;
 			targetProxy = C26F144D2AEF338700A543DA /* PBXContainerItemProxy */;
+		};
+		C2B6C97B2B09A84A00944243 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C2B6C9672B09A84700944243 /* ShortcutWidgetExtension */;
+			targetProxy = C2B6C97A2B09A84A00944243 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -418,6 +537,7 @@
 		C26F14572AEF338700A543DA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Funpone/Funpone.entitlements;
@@ -456,6 +576,7 @@
 		C26F14582AEF338700A543DA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Funpone/Funpone.entitlements;
@@ -581,6 +702,65 @@
 			};
 			name = Release;
 		};
+		C2B6C97E2B09A84A00944243 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JUM2QXBN9B;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ShortcutWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ShortcutWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vitantonio.nagauzzi.Funpone.ShortcutWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C2B6C97F2B09A84A00944243 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JUM2QXBN9B;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ShortcutWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ShortcutWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vitantonio.nagauzzi.Funpone.ShortcutWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -616,6 +796,15 @@
 			buildConfigurations = (
 				C26F145D2AEF338700A543DA /* Debug */,
 				C26F145E2AEF338700A543DA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C2B6C9802B09A84A00944243 /* Build configuration list for PBXNativeTarget "ShortcutWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C2B6C97E2B09A84A00944243 /* Debug */,
+				C2B6C97F2B09A84A00944243 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -1,0 +1,21 @@
+name: Tag
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'branch (e.g. main)'     
+        required: false
+        default: 'main'
+      version:
+        description: 'versionName (e.g. 2024.3.1)'     
+        required: true
+        default: '2024.3.1'
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: git fetch origin ${{ github.event.inputs.branch }}
+      - run: git checkout ${{ github.event.inputs.branch }}
+      - run: git tag funpone-v${{ github.event.inputs.version }}
+      - run: git push origin funpone-v${{ github.event.inputs.version }}

@@ -1,6 +1,5 @@
 package com.vitantonio.nagauzzi.funpone.ui
 
-import android.graphics.drawable.Icon as AndroidIcon
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -24,6 +23,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import android.graphics.drawable.Icon as AndroidIcon
 
 @Composable
 fun SettingView(

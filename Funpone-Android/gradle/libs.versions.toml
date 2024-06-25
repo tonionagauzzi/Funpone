@@ -1,5 +1,7 @@
 [versions]
+ktlint-plugin = "11.6.1"
 screenshot = "0.0.1-alpha02"
 
 [plugins]
+ktlint-plugin = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint-plugin" }
 screenshot = { id = "com.android.compose.screenshot", version.ref = "screenshot"}

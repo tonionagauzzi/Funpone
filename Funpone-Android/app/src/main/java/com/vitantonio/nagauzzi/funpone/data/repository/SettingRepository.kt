@@ -10,6 +10,7 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import com.vitantonio.nagauzzi.funpone.data.entity.Link
 import com.vitantonio.nagauzzi.funpone.data.datasource.dataStore
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -32,7 +33,7 @@ internal class SettingRepositoryImpl(
     init {
         context.dataStore.data.map { preferences ->
             set(preferences.toLink())
-        }.launchIn(CoroutineScope(context.mainExecutor.asCoroutineDispatcher()))
+        }.launchIn(CoroutineScope(Dispatchers.IO))
     }
 
     override suspend fun set(link: Link) {

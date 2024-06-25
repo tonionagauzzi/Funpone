@@ -5,6 +5,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.vitantonio.nagauzzi.funpone.R
@@ -12,7 +13,7 @@ import com.vitantonio.nagauzzi.funpone.R
 @Composable
 fun LinkLabel(label: String, onLabelChange: (String) -> Unit) {
     TextField(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth().testTag("LinkLabel"),
         placeholder = {
             Text(text = stringResource(id = R.string.label))
         },

@@ -20,16 +20,17 @@ import com.vitantonio.nagauzzi.funpone.data.entity.Link
 import com.vitantonio.nagauzzi.funpone.data.repository.SettingRepository
 import com.vitantonio.nagauzzi.funpone.data.repository.ShortcutRepository
 import com.vitantonio.nagauzzi.funpone.ui.theme.FunponeTheme
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 @Composable
 fun SettingView(
+    coroutineScope: CoroutineScope = rememberCoroutineScope(),
     settingRepository: SettingRepository,
     shortcutRepository: ShortcutRepository
 ) {
-    val coroutineScope = rememberCoroutineScope()
     val link by settingRepository.link.collectAsState(initial = Link())
 
     Column {
@@ -53,12 +54,12 @@ fun SettingView(
         Button(
             modifier = Modifier.align(Alignment.End),
             onClick = {
+                shortcutRepository.createShortcut(
+                    link = link,
+                    icon = AndroidIcon.createWithResource(context, R.mipmap.ic_launcher)
+                )
                 coroutineScope.launch {
                     settingRepository.save(link = link)
-                    shortcutRepository.createShortcut(
-                        link = link,
-                        icon = AndroidIcon.createWithResource(context, R.mipmap.ic_launcher)
-                    )
                 }
             }
         ) {

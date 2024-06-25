@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.screenshot)
 }
 
 android {
@@ -33,6 +34,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    experimentalProperties["android.experimental.enableScreenshotTest"] = true
     kotlinOptions {
         jvmTarget = "1.8"
     }
@@ -70,4 +72,5 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-tooling-preview")
+    screenshotTestImplementation("androidx.compose.ui:ui-tooling")
 }

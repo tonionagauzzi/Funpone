@@ -8,7 +8,6 @@ import android.graphics.drawable.Icon
 import androidx.core.net.toUri
 import androidx.test.platform.app.InstrumentationRegistry
 import com.vitantonio.nagauzzi.funpone.data.entity.Link
-import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -23,7 +22,7 @@ class ShortcutRepositoryTest {
     private val shortcutRepository: ShortcutRepository by context.repository()
 
     @Test
-    fun test_createShortcut() = runBlocking {
+    fun test_createShortcut() {
         val link = Link(label = "サンプル", url = "https://example.co.jp/")
         val icon = createPNGIcon(context)
         shortcutRepository.createShortcut(link, icon)

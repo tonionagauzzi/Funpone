@@ -20,8 +20,8 @@ import com.vitantonio.nagauzzi.funpone.data.entity.Link
 import com.vitantonio.nagauzzi.funpone.data.repository.SettingRepository
 import com.vitantonio.nagauzzi.funpone.data.repository.ShortcutRepository
 import com.vitantonio.nagauzzi.funpone.ui.theme.FunponeTheme
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 @Composable
@@ -38,7 +38,7 @@ fun SettingView(
             label = link.label,
             onLabelChange = { newUrl ->
                 coroutineScope.launch {
-                    settingRepository.save(link = link.copy(label = newUrl))
+                    settingRepository.set(link = link.copy(label = newUrl))
                 }
             }
         )
@@ -46,17 +46,20 @@ fun SettingView(
             url = link.url,
             onUrlChange = { newUrl ->
                 coroutineScope.launch {
-                    settingRepository.save(link = link.copy(url = newUrl))
+                    settingRepository.set(link = link.copy(url = newUrl))
                 }
             }
         )
         Button(
             modifier = Modifier.align(Alignment.End),
             onClick = {
-                shortcutRepository.createShortcut(
-                    link = link,
-                    icon = AndroidIcon.createWithResource(context, R.mipmap.ic_launcher)
-                )
+                coroutineScope.launch {
+                    settingRepository.save(link = link)
+                    shortcutRepository.createShortcut(
+                        link = link,
+                        icon = AndroidIcon.createWithResource(context, R.mipmap.ic_launcher)
+                    )
+                }
             }
         ) {
             Icon(
@@ -79,13 +82,14 @@ fun SettingViewPreview() {
 }
 
 private class SettingRepositoryStubForPreview(
-    override val link: Flow<Link> = listOf(
+    override val link: StateFlow<Link> = MutableStateFlow(
         Link(
             label = "Example",
             url = "https://example.com/"
         )
-    ).asFlow()
+    )
 ) : SettingRepository {
+    override suspend fun set(link: Link) = Unit
     override suspend fun save(link: Link) = Unit
 }
 

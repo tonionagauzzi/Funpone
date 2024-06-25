@@ -9,9 +9,8 @@ import androidx.compose.ui.test.performClick
 import com.vitantonio.nagauzzi.funpone.data.entity.Link
 import com.vitantonio.nagauzzi.funpone.data.repository.SettingRepository
 import com.vitantonio.nagauzzi.funpone.data.repository.ShortcutRepository
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
@@ -38,12 +37,13 @@ class SettingViewTest {
     }
 
     @Test
-    fun test_SettingView_AddButton() = runBlocking {
+    fun test_SettingView_AddButton() {
         val node = composeTestRule.onNodeWithContentDescription("Add")
         node.assertIsDisplayed()
         node.assertHasClickAction()
         node.performClick()
         assertEquals(1, shortcutRepository.createShortcutCount)
+        assertEquals(1, settingRepository.saveCount)
     }
 }
 
@@ -55,14 +55,15 @@ private class ShortcutRepositoryStubForTest : ShortcutRepository {
 }
 
 private class SettingRepositoryStubForTest(
-    override val link: Flow<Link> = listOf(
+    override val link: StateFlow<Link> = MutableStateFlow(
         Link(
             label = "Example",
             url = "https://example.com/"
         )
-    ).asFlow()
+    )
 ) : SettingRepository {
     var saveCount = 0
+    override suspend fun set(link: Link) {}
     override suspend fun save(link: Link) {
         saveCount++
     }

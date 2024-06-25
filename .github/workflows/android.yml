@@ -28,7 +28,7 @@ jobs:
     - name: Build and test with Gradle
       env:
         TZ: "Asia/Tokyo"
-      run: ./gradlew check validateScreenshotTest
+      run: ./gradlew testDebugUnitTest ktlintCheck validateDebugScreenshotTest --no-daemon
 
     - name: Save failed results
       if: failure()

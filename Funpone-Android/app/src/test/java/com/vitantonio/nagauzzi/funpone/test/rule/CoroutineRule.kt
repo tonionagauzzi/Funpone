@@ -11,8 +11,8 @@ import org.junit.runner.Description
 import kotlinx.coroutines.test.runTest as originalRunTest
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class CoroutineRule : TestWatcher() {
-    private val testDispatcher = UnconfinedTestDispatcher()
+internal class CoroutineRule : TestWatcher() {
+    val testDispatcher = UnconfinedTestDispatcher()
     val scope = TestScope(testDispatcher)
 
     override fun starting(description: Description?) {

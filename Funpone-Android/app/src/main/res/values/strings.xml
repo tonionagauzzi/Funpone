@@ -1,6 +1,8 @@
 <resources>
-    <string name="app_name">Funpone</string>
     <string name="add">Add</string>
-    <string name="url">URL</string>
+    <string name="app_name">Funpone</string>
+    <string name="icon_url">Icon URL</string>
     <string name="label">Label</string>
+    <string name="load_icon">Load icon</string>
+    <string name="url">URL</string>
 </resources>

@@ -13,6 +13,7 @@ import androidx.core.net.toUri
 import androidx.test.platform.app.InstrumentationRegistry
 import com.vitantonio.nagauzzi.funpone.data.datasource.dataStore
 import com.vitantonio.nagauzzi.funpone.data.entity.Link
+import com.vitantonio.nagauzzi.funpone.data.repository.IconRepository
 import com.vitantonio.nagauzzi.funpone.data.repository.SettingRepository
 import com.vitantonio.nagauzzi.funpone.data.repository.ShortcutRepository
 import com.vitantonio.nagauzzi.funpone.data.repository.repository
@@ -27,7 +28,7 @@ import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
-class SettingViewTest {
+internal class SettingViewTest {
     @get:Rule
     val coroutineRule = CoroutineRule()
 
@@ -35,14 +36,16 @@ class SettingViewTest {
     val composeTestRule = createComposeRule()
 
     private val context = InstrumentationRegistry.getInstrumentation().context
-    private val settingRepository: SettingRepository by context.repository()
+    private val settingRepository: SettingRepository by context.repository(ioDispatcher = coroutineRule.testDispatcher)
 
     @Before
     fun setUp() {
+        val iconRepository: IconRepository by context.repository(ioDispatcher = coroutineRule.testDispatcher)
         val shortcutRepository: ShortcutRepository by context.repository()
         composeTestRule.setContent {
             SettingView(
                 coroutineScope = coroutineRule.scope,
+                iconRepository = iconRepository,
                 settingRepository = settingRepository,
                 shortcutRepository = shortcutRepository
             )
@@ -63,10 +66,17 @@ class SettingViewTest {
         urlNode.performTextClearance()
         urlNode.performTextInput("https://example2.com/")
 
+        // Input the icon URL
+        val iconUriNode = composeTestRule.onNodeWithTag("LinkIconUri")
+        iconUriNode.assertIsDisplayed()
+        iconUriNode.performTextClearance()
+        iconUriNode.performTextInput("content://media/picker/0/com.android.providers.media.photopicker/media/1000000000")
+
         // Check set link
         val expectedLink = Link(
             label = "Example2",
-            url = "https://example2.com/"
+            url = "https://example2.com/",
+            iconUri = "content://media/picker/0/com.android.providers.media.photopicker/media/1000000000"
         )
         assertEquals(expectedLink, settingRepository.link.value)
 
@@ -75,6 +85,7 @@ class SettingViewTest {
         node.assertIsDisplayed()
         node.assertHasClickAction()
         node.performClick()
+        composeTestRule.mainClock.advanceTimeBy(milliseconds = 10000L)
 
         // Check saved link
         val shortcutManager = context.getSystemService(ShortcutManager::class.java)!!

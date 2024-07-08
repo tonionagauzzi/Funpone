@@ -77,8 +77,10 @@ fun SettingView(
             }
             Button(
                 onClick = {
-                    singlePhotoPickerLauncher.launch(PickVisualMediaRequest(
-                        ActivityResultContracts.PickVisualMedia.ImageOnly)
+                    singlePhotoPickerLauncher.launch(
+                        PickVisualMediaRequest(
+                            ActivityResultContracts.PickVisualMedia.ImageOnly
+                        )
                     )
                 }
             ) {

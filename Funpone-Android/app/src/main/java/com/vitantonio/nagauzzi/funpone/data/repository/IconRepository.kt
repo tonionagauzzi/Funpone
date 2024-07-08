@@ -5,7 +5,7 @@ import android.graphics.drawable.Icon
 import com.vitantonio.nagauzzi.funpone.data.datasource.IconLocalDataSource
 import kotlinx.coroutines.CoroutineDispatcher
 
-interface IconRepository: Repository {
+interface IconRepository : Repository {
     suspend fun get(iconUri: String): Icon
 }
 

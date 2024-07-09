@@ -85,7 +85,6 @@ internal class SettingViewTest {
         node.assertIsDisplayed()
         node.assertHasClickAction()
         node.performClick()
-        composeTestRule.mainClock.advanceTimeBy(milliseconds = 10000L)
 
         // Check saved link
         val shortcutManager = context.getSystemService(ShortcutManager::class.java)!!

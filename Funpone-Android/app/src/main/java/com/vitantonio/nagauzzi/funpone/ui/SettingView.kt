@@ -96,7 +96,6 @@ fun SettingView(
                         val icon = try {
                             iconRepository.get(link.iconUri)
                         } catch (e: Exception) {
-                            val ee = e
                             AndroidIcon.createWithResource(context, R.mipmap.ic_launcher)
                         }
                         shortcutRepository.createShortcut(

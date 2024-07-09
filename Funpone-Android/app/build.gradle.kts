@@ -70,7 +70,7 @@ dependencies {
     testImplementation("androidx.test.ext:junit-ktx:1.2.0")
     testImplementation("app.cash.turbine:turbine:1.0.0")
     testImplementation("junit:junit:4.13.2")
-    testImplementation("org.robolectric:robolectric:4.12.2")
+    testImplementation("org.robolectric:robolectric:4.13")
     testImplementation("androidx.compose.ui:ui-test-junit4:1.6.8")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     screenshotTestImplementation("androidx.compose.ui:ui-tooling")

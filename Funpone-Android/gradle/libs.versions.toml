@@ -1,5 +1,5 @@
 [versions]
-ktlint-plugin = "11.6.1"
+ktlint-plugin = "12.2.0"
 screenshot = "0.0.1-alpha02"
 
 [plugins]

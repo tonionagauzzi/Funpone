@@ -66,7 +66,7 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
-    implementation("androidx.datastore:datastore-preferences:1.1.1")
+    implementation("androidx.datastore:datastore-preferences:1.1.3")
     testImplementation("androidx.test.ext:junit-ktx:1.2.1")
     testImplementation("app.cash.turbine:turbine:1.1.0")
     testImplementation("junit:junit:4.13.2")

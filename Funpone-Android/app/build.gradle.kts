@@ -56,9 +56,9 @@ android {
 }
 
 dependencies {
-    debugImplementation(libs.compose.ui.test.manifest)
     implementation(libs.activity.compose)
     implementation(platform(libs.compose.bom))
+    implementation(libs.compose.ui.test.manifest)
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.graphics)
     implementation(libs.compose.ui.tooling)

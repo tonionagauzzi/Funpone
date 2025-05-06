@@ -19,13 +19,15 @@ import kotlinx.coroutines.flow.map
 
 interface SettingRepository : Repository {
     val link: StateFlow<Link>
+
     suspend fun set(link: Link)
+
     suspend fun save(link: Link)
 }
 
 internal class SettingRepositoryImpl(
     private val context: Context,
-    dispatcher: CoroutineDispatcher
+    dispatcher: CoroutineDispatcher,
 ) : SettingRepository {
     private val mutableLink = MutableStateFlow(Link())
     override val link: StateFlow<Link> = mutableLink.asStateFlow()

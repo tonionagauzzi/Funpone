@@ -15,7 +15,7 @@ internal class IconRepositoryImpl(
     private val dataSource: IconLocalDataSource = IconLocalDataSource(
         context = context,
         dispatcher = dispatcher
-    )
+    ),
 ) : IconRepository {
     override suspend fun get(iconUri: String) = dataSource.load(iconUri = iconUri)
 }

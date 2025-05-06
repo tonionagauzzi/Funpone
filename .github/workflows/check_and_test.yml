@@ -38,6 +38,7 @@ jobs:
           name: Result
           path: |
             ./**/build/reports/lint-results-*.html
+            ./**/build/reports/problems
             ./**/build/reports/screenshotTest
             ./**/build/reports/tests
           retention-days: 30

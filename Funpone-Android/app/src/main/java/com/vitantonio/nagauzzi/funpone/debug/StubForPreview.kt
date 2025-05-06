@@ -18,9 +18,10 @@ internal class SettingRepositoryStubForPreview(
             label = "Example",
             url = "https://example.com/"
         )
-    )
+    ),
 ) : SettingRepository {
     override suspend fun set(link: Link) = Unit
+
     override suspend fun save(link: Link) = Unit
 }
 

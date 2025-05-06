@@ -37,7 +37,7 @@ fun SettingView(
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
     iconRepository: IconRepository,
     settingRepository: SettingRepository,
-    shortcutRepository: ShortcutRepository
+    shortcutRepository: ShortcutRepository,
 ) {
     val link by settingRepository.link.collectAsState(initial = Link())
 

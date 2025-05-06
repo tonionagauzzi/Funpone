@@ -10,7 +10,7 @@ import java.util.concurrent.CancellationException
 
 internal class IconLocalDataSource(
     private val context: Context,
-    private val dispatcher: CoroutineDispatcher
+    private val dispatcher: CoroutineDispatcher,
 ) {
     suspend fun load(iconUri: String): Icon {
         return withContext(dispatcher) {

@@ -14,7 +14,7 @@ import com.vitantonio.nagauzzi.funpone.ui.theme.FunponeTheme
 fun FunponeView(
     iconRepository: IconRepository,
     settingRepository: SettingRepository,
-    shortcutRepository: ShortcutRepository
+    shortcutRepository: ShortcutRepository,
 ) {
     FunponeTheme {
         Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {

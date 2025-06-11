@@ -23,5 +23,5 @@ compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", versi
 compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview", version.ref = "compose-ui" }
 datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version = "1.1.4" }
 junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version = "1.2.1" }
-turbine = { group = "app.cash.turbine", name = "turbine", version = "1.2.0" }
+turbine = { group = "app.cash.turbine", name = "turbine", version = "1.2.1" }
 robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric" }

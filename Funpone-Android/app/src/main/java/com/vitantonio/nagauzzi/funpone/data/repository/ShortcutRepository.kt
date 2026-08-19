@@ -14,7 +14,9 @@ interface ShortcutRepository : Repository {
     fun createShortcut(link: Link, icon: Icon)
 }
 
-internal class ShortcutRepositoryImpl(private val context: Context) : ShortcutRepository {
+internal class ShortcutRepositoryImpl(
+    private val context: Context,
+) : ShortcutRepository {
     override fun createShortcut(link: Link, icon: Icon) {
         val shortcutManager = context.getSystemService(ShortcutManager::class.java) ?: return
         if (shortcutManager.isRequestPinShortcutSupported) {
@@ -22,7 +24,8 @@ internal class ShortcutRepositoryImpl(private val context: Context) : ShortcutRe
                 action = Intent.ACTION_VIEW
                 data = link.url.toUri()
             }
-            val shortcutInfo = ShortcutInfo.Builder(context, UUID.randomUUID().toString())
+            val shortcutInfo = ShortcutInfo
+                .Builder(context, UUID.randomUUID().toString())
                 .setShortLabel(link.label)
                 .setIntent(intent)
                 .setIcon(icon)

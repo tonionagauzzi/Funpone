@@ -2,11 +2,13 @@ package com.vitantonio.nagauzzi.funpone.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import com.android.tools.screenshot.PreviewTest
 import com.vitantonio.nagauzzi.funpone.debug.IconRepositoryStubForPreview
 import com.vitantonio.nagauzzi.funpone.debug.SettingRepositoryStubForPreview
 import com.vitantonio.nagauzzi.funpone.debug.ShortcutRepositoryStubForPreview
 
 class FunponeViewTest {
+    @PreviewTest
     @Preview(showBackground = true)
     @Composable
     fun PreviewFunponeView() {

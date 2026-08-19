@@ -33,9 +33,10 @@ internal class SettingRepositoryImpl(
     override val link: StateFlow<Link> = mutableLink.asStateFlow()
 
     init {
-        context.dataStore.data.map { preferences ->
-            set(preferences.toLink())
-        }.launchIn(CoroutineScope(dispatcher))
+        context.dataStore.data
+            .map { preferences ->
+                set(preferences.toLink())
+            }.launchIn(CoroutineScope(dispatcher))
     }
 
     override suspend fun set(link: Link) {
@@ -68,10 +69,8 @@ private fun MutablePreferences.save(link: Link) {
 }
 
 @VisibleForTesting(otherwise = PRIVATE)
-fun Preferences.toLink(): Link {
-    return Link(
-        label = this[PreferencesKeys.LABEL] ?: PreferencesValues.INITIAL_LABEL,
-        url = this[PreferencesKeys.URL] ?: PreferencesValues.INITIAL_URL,
-        iconUri = this[PreferencesKeys.ICON_URI] ?: PreferencesValues.INITIAL_ICON_URI
-    )
-}
+fun Preferences.toLink(): Link = Link(
+    label = this[PreferencesKeys.LABEL] ?: PreferencesValues.INITIAL_LABEL,
+    url = this[PreferencesKeys.URL] ?: PreferencesValues.INITIAL_URL,
+    iconUri = this[PreferencesKeys.ICON_URI] ?: PreferencesValues.INITIAL_ICON_URI
+)

@@ -12,19 +12,17 @@ internal class IconLocalDataSource(
     private val context: Context,
     private val dispatcher: CoroutineDispatcher,
 ) {
-    suspend fun load(iconUri: String): Icon {
-        return withContext(dispatcher) {
-            try {
-                val inputStream = context.contentResolver.openInputStream(iconUri.toUri())
-                val iconBitmap = inputStream.use {
-                    BitmapFactory.decodeStream(it)
-                }
-                Icon.createWithBitmap(iconBitmap)
-            } catch (e: CancellationException) {
-                throw e
-            } catch (e: Exception) {
-                throw e
+    suspend fun load(iconUri: String): Icon = withContext(dispatcher) {
+        try {
+            val inputStream = context.contentResolver.openInputStream(iconUri.toUri())
+            val iconBitmap = inputStream.use {
+                BitmapFactory.decodeStream(it)
             }
+            Icon.createWithBitmap(iconBitmap)
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: Exception) {
+            throw e
         }
     }
 }

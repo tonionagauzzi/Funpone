@@ -91,7 +91,9 @@ internal class SettingViewTest {
         val createdShortcut =
             shortcutManager.pinnedShortcuts.first { it.shortLabel == expectedLink.label }
         assertEquals(expectedLink.url.toUri(), createdShortcut.intent?.data)
-        val savedLink = context.dataStore.data.first { it.toLink() == expectedLink }.toLink()
+        val savedLink = context.dataStore.data
+            .first { it.toLink() == expectedLink }
+            .toLink()
         assertEquals(expectedLink, savedLink)
     }
 }

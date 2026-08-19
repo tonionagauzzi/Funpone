@@ -1,6 +1,5 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ktlint)
     alias(libs.plugins.screenshot)
@@ -8,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.vitantonio.nagauzzi.funpone"
-    compileSdk = 35
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "com.vitantonio.nagauzzi.funpone"
@@ -23,6 +22,7 @@ android {
         }
     }
 
+    testBuildType = "release"
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -33,13 +33,10 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     experimentalProperties["android.experimental.enableScreenshotTest"] = true
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
     buildFeatures {
         compose = true
     }
@@ -66,7 +63,10 @@ dependencies {
     implementation(libs.compose.material3)
     implementation(libs.core.ktx)
     implementation(libs.datastore.preferences)
+    screenshotTestImplementation(platform(libs.compose.bom))
     screenshotTestImplementation(libs.compose.ui.tooling)
+    screenshotTestImplementation(libs.screenshot.validation.api)
+    testImplementation(platform(libs.compose.bom))
     testImplementation(libs.compose.ui.test.junit4)
     testImplementation(libs.junit.ktx)
     testImplementation(libs.robolectric)
